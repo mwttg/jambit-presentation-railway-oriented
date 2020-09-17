@@ -1,0 +1,9 @@
+# IntelliJ
+/.idea/
+/out/
+*.iml
+/output/
+/target
+
+.classpath
+.project
