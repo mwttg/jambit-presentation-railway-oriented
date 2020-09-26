@@ -17,18 +17,17 @@ public class Future2Test {
     @Test
     public void testFeature() {
         final var details = Future.of(() -> getDetail("ok"));
-        final var relations = Future.of(() -> getRelation("error1"));
+        final var relations = Future.of(() -> getRelation("error-no"));
 
-        final var x = API.For(details, relations)
+        final var result = API.For(details, relations)
                 .yield(Tuple::of)
                 .map(merge())
                 .map(fetchImages())
                 .toTry()
                 .toEither()
-                .mapLeft(Throwable::getCause)
+                .mapLeft(Throwable::getMessage)
                 .map(createResponse());
 
-        final var result = x.toEither("error");
         System.out.println(result);
     }
 
